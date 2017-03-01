@@ -1,7 +1,7 @@
 package br.com.jerodac;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import br.com.jerodac.business.FactoryAsyncTask;
 import br.com.jerodac.business.RestClient;
@@ -26,5 +26,6 @@ public class MainActivity extends AppCompatActivity {
                 AppLog.v(AppLog.TAG, "success!");
             }
         }.execute();
+
     }
 }

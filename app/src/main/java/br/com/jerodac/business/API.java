@@ -9,18 +9,27 @@ import retrofit.http.Query;
  */
 public interface API {
 
-    String PLAYLIST = "/playlist";
+    //path
+    String PLAYLIST = "/playlists";
     String PLAYLIST_ITEM = "/playlistitems";
     String VIDEOS = "/videos";
 
+    //strings query
+    String QUERY_KEY = "key";
+    String QUERY_ID = "id";
+    String QUERY_PART = "part";
+    String QUERY_CHANNEL_ID = "channelId";
+    String QUERY_PLAYLIST_ID = "playlistId";
+
+
     @GET(PLAYLIST)
-    ResponseDto playList(@Query("ID_USER") String userId, @Query("KEY_GOOGLE") String keyGoogle);
+    ResponseDto playList(@Query(QUERY_PART) String part, @Query(QUERY_CHANNEL_ID) String userId, @Query(QUERY_KEY) String keyGoogle);
 
     @GET(PLAYLIST_ITEM)
-    ResponseDto playListItem(@Query("PLAY_LIST_ID") String playListId, @Query("KEY_GOOGLE") String keyGoogle);
+    ResponseDto playListItem(@Query(QUERY_PART) String part, @Query(QUERY_PLAYLIST_ID) String playListId, @Query(QUERY_KEY) String keyGoogle);
 
     @GET(VIDEOS)
-    ResponseDto videoDescribe(@Query("ID_VIDEO") String videoId, @Query("KEY_GOOGLE") String keyGoogle);
+    ResponseDto videoDescribe(@Query(QUERY_PART) String part, @Query(QUERY_ID) String videoId, @Query(QUERY_KEY) String keyGoogle);
 
 }
 
