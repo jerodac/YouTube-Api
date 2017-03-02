@@ -30,6 +30,10 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void settings(View rootView);
 
+    public String getTagName() {
+        return "";
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

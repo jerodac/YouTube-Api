@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ListTube</string>
+    <string name="describe_playlist">Channel List Youtube</string>
 </resources>
