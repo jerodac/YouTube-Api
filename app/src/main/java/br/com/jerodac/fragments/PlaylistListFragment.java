@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import br.com.jerodac.R;
-import br.com.jerodac.adapters.ChannelListAdapter;
+import br.com.jerodac.adapters.PLaylistListAdapter;
 import br.com.jerodac.controllers.MainController;
 import br.com.jerodac.model.ModelPresenter;
 import br.com.jerodac.vo.PlayListItem;
@@ -34,7 +34,7 @@ public class PlaylistListFragment extends BaseFragment {
     protected ViewGroup mContainerLoader;
 
     //Adapter
-    private ChannelListAdapter mAdapter;
+    private PLaylistListAdapter mAdapter;
 
     @Override
     protected int getLayoutResource() {
@@ -49,7 +49,8 @@ public class PlaylistListFragment extends BaseFragment {
     @Override
     protected void initComponents(View rootView) {
         getController().attatchListener(onResult);
-        getController().getChannelList();
+        //getController().getChannelList();
+        getController().getPlaylistList();
         swipeRefreshLayout.setOnRefreshListener(onSwipeRefresh);
     }
 
@@ -62,12 +63,12 @@ public class PlaylistListFragment extends BaseFragment {
 
     private void populateRecyclerView(List<PlayListItem> dataset) {
         recyclerView.removeAllViews();
-        mAdapter = new ChannelListAdapter(getContext(), dataset);
+        mAdapter = new PLaylistListAdapter(getContext(), dataset);
         mAdapter.setOnItemClickListener(onItemClickListener);
         recyclerView.setAdapter(mAdapter);
     }
 
-    ChannelListAdapter.OnItemClickListener onItemClickListener = new ChannelListAdapter.OnItemClickListener() {
+    PLaylistListAdapter.OnItemClickListener onItemClickListener = new PLaylistListAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(int position, PlayListItem playlist, View v) {
 
@@ -81,7 +82,7 @@ public class PlaylistListFragment extends BaseFragment {
             if (swipeRefreshLayout.getVisibility() != View.VISIBLE) {
                 hideLoader();
             }
-            populateRecyclerView(modelPresenter.getChannelList());
+            populateRecyclerView(modelPresenter.getPlaylistList());
         }
 
         @Override

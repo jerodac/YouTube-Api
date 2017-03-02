@@ -1,7 +1,7 @@
 package br.com.jerodac.business;
 
 
-import br.com.jerodac.vo.ChannelListResponse;
+import br.com.jerodac.vo.PLaylistListResponse;
 
 
 /**
@@ -15,12 +15,12 @@ public class RestClient {
     private static String PART = "snippet";
 
     //Returns playlist of user videos
-    public static ChannelListResponse getAllPlayList() {
+    public static PLaylistListResponse getAllPlayList() {
         return Configuration.getApi().playList(PART, CHANNEL_ID, KEY_GOOGLE);
     }
 
     //Returns videos from a specific playlist
-    public static ChannelListResponse getVideosByPLayList(String playListId) {
+    public static PLaylistListResponse getVideosByPLayList(String playListId) {
         return Configuration.getApi().playListItem(PART, playListId, KEY_GOOGLE);
     }
 //

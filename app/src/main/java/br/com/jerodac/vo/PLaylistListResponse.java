@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @author Jean Rodrigo Dalbon Cunha on 02/03/17.
  */
-public class ChannelListResponse extends BaseResponse {
+public class PLaylistListResponse extends BaseResponse {
 
     private String kind;
     private List<PlayListItem> items;

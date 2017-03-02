@@ -18,15 +18,15 @@ import br.com.jerodac.vo.PlayListItem;
 /**
  * @author Jean Rodrigo Dalbon Cunha on 13/01/17.
  */
-public class ChannelListAdapter extends RecyclerView
-        .Adapter<ChannelListAdapter
+public class PLaylistListAdapter extends RecyclerView
+        .Adapter<PLaylistListAdapter
         .DataObjectHolder> {
 
     private List<PlayListItem> mDataset;
     private static OnItemClickListener onItemClickListener;
     private Context mContext;
 
-    public ChannelListAdapter(Context context, List<PlayListItem> dataset) {
+    public PLaylistListAdapter(Context context, List<PlayListItem> dataset) {
         mContext = context;
         mDataset = dataset;
     }
@@ -36,13 +36,15 @@ public class ChannelListAdapter extends RecyclerView
             implements View
             .OnClickListener {
 
+        TextView tvTitle;
         TextView tvDescribe;
         ImageView imgChannel;
 
 
         public DataObjectHolder(View itemView) {
             super(itemView);
-            tvDescribe = (TextView) itemView.findViewById(R.id.tv_title_radio);
+            tvTitle = (TextView) itemView.findViewById(R.id.tv_title_playlist);
+            tvDescribe = (TextView) itemView.findViewById(R.id.tv_describe_playlist);
             imgChannel = (ImageView) itemView.findViewById(R.id.img_radio);
 
             itemView.setOnClickListener(this);
@@ -65,7 +67,7 @@ public class ChannelListAdapter extends RecyclerView
     public DataObjectHolder onCreateViewHolder(ViewGroup parent,
                                                int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.cardview_item_channel, parent, false);
+                .inflate(R.layout.cardview_item_playlist, parent, false);
 
         DataObjectHolder dataObjectHolder = new DataObjectHolder(view);
         return dataObjectHolder;
@@ -74,7 +76,8 @@ public class ChannelListAdapter extends RecyclerView
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
 
-        holder.tvDescribe.setText(mDataset.get(position).getSnippet().getTitle());
+        holder.tvTitle.setText(mDataset.get(position).getSnippet().getTitle());
+        holder.tvDescribe.setText(mDataset.get(position).getSnippet().getDescription());
 
         Picasso.with(mContext)
                 .load(mDataset.get(position).getSnippet().getThumbnails().getMedium().getUrl())

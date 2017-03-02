@@ -5,7 +5,7 @@ import br.com.jerodac.business.RestClient;
 import br.com.jerodac.business.RestError;
 import br.com.jerodac.model.ModelPresenter;
 import br.com.jerodac.utils.AppLog;
-import br.com.jerodac.vo.ChannelListResponse;
+import br.com.jerodac.vo.PLaylistListResponse;
 import br.com.jerodac.vo.PlayListItem;
 
 /**
@@ -41,14 +41,14 @@ public class MainController {
     }
 
     public void getChannelList() {
-        new FactoryAsyncTask<ChannelListResponse>() {
+        new FactoryAsyncTask<PLaylistListResponse>() {
             @Override
-            protected ChannelListResponse doIt() {
+            protected PLaylistListResponse doIt() {
                 return RestClient.getAllPlayList();
             }
 
             @Override
-            protected void onSuccess(ChannelListResponse response) {
+            protected void onSuccess(PLaylistListResponse response) {
                 AppLog.v(AppLog.TAG, "getChannelList() - success");
                 modelPresenter.setChannelList(response.getItems());
                 notifyListener(true);
@@ -57,6 +57,28 @@ public class MainController {
             @Override
             protected void onError(RestError restError) {
                 AppLog.e(AppLog.TAG, "getChannelList() - error", restError.getException());
+                notifyListener(false);
+            }
+        }.execute();
+    }
+
+    public void getPlaylistList() {
+        new FactoryAsyncTask<PLaylistListResponse>() {
+            @Override
+            protected PLaylistListResponse doIt() {
+                return RestClient.getVideosByPLayList(modelPresenter.getCurrentPlaylist().getId());
+            }
+
+            @Override
+            protected void onSuccess(PLaylistListResponse response) {
+                AppLog.v(AppLog.TAG, "getPlaylistList() - success");
+                modelPresenter.setPlaylistList(response.getItems());
+                notifyListener(true);
+            }
+
+            @Override
+            protected void onError(RestError restError) {
+                AppLog.e(AppLog.TAG, "getPlaylistList - error", restError.getException());
                 notifyListener(false);
             }
         }.execute();
