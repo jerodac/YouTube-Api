@@ -1,6 +1,11 @@
 package br.com.jerodac.business;
 
-import br.com.jerodac.dto.ResponseDto;
+
+import com.google.api.client.json.GenericJson;
+
+import br.com.jerodac.vo.PlaylistListResponse;
+import br.com.jerodac.vo.VideoListResponse;
+
 
 /**
  * @author Jean Rodrigo Dalbon Cunha on 01/03/17.
@@ -13,17 +18,17 @@ public class RestClient {
     private static String PART = "snippet";
 
     //Returns playlist of user videos
-    public static ResponseDto getAllPlayList() {
+    public static PlaylistListResponse getAllPlayList() {
         return Configuration.getApi().playList(PART, CHANNEL_ID, KEY_GOOGLE);
     }
 
     //Returns videos from a specific playlist
-    public static ResponseDto getVideosByPLayList(String playListId) {
+    public static PlaylistListResponse getVideosByPLayList(String playListId) {
         return Configuration.getApi().playListItem(PART, playListId, KEY_GOOGLE);
     }
 
     //Returns information about a video
-    public static ResponseDto getInfoByVideo(String videoId) {
+    public static VideoListResponse getInfoByVideo(String videoId) {
         return Configuration.getApi().videoDescribe(PART, videoId, KEY_GOOGLE);
     }
 }
