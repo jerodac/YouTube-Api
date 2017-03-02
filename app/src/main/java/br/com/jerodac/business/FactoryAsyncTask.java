@@ -3,18 +3,17 @@ package br.com.jerodac.business;
 import android.os.AsyncTask;
 import android.os.Handler;
 
-import com.google.api.client.json.GenericJson;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.jerodac.utils.AppLog;
+import br.com.jerodac.vo.BaseResponse;
 import retrofit.RetrofitError;
 
 /**
  * @author Jean Rodrigo Dalbon Cunha on 01/03/17.
  */
-public abstract class FactoryAsyncTask<Result extends GenericJson>
+public abstract class FactoryAsyncTask<Result extends BaseResponse>
         extends AsyncTask<Void, Void, Result> {
 
     private List<Runnable> mExitListeners = new ArrayList<>();
@@ -30,7 +29,7 @@ public abstract class FactoryAsyncTask<Result extends GenericJson>
     protected void onError(RestError restError) {
     }
 
-    protected void onFail(GenericJson responseVO) {
+    protected void onFail(BaseResponse responseVO) {
 
     }
 
@@ -73,7 +72,7 @@ public abstract class FactoryAsyncTask<Result extends GenericJson>
                 RestError restError = new RestError(mError);
                 try {
                     if (mError instanceof RetrofitError) {
-                        GenericJson responseVO = (GenericJson) ((RetrofitError) mError).getBodyAs(GenericJson.class);
+                        BaseResponse responseVO = (BaseResponse) ((RetrofitError) mError).getBodyAs(BaseResponse.class);
                         if (responseVO != null) {
                             onFail(responseVO);
                         } else {

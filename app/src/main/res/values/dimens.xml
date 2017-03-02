@@ -12,4 +12,11 @@
 
     <dimen name="backdrop_title">30dp</dimen>
     <dimen name="backdrop_subtitle">20dp</dimen>
+
+    <!--CardView -->
+    <dimen name="card_margin">5dp</dimen>
+    <dimen name="card_channel_radius">0dp</dimen>
+    <dimen name="album_cover_height">180dp</dimen>
+    <dimen name="album_title_padding">10dp</dimen>
+    <dimen name="album_title">15dp</dimen>
 </resources>

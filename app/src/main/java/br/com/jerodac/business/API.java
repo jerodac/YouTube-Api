@@ -1,7 +1,6 @@
 package br.com.jerodac.business;
 
-import br.com.jerodac.vo.PlaylistListResponse;
-import br.com.jerodac.vo.VideoListResponse;
+import br.com.jerodac.vo.ChannelListResponse;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
@@ -24,13 +23,13 @@ public interface API {
 
 
     @GET(PLAYLIST)
-    PlaylistListResponse playList(@Query(QUERY_PART) String part, @Query(QUERY_CHANNEL_ID) String userId, @Query(QUERY_KEY) String keyGoogle);
+    ChannelListResponse playList(@Query(QUERY_PART) String part, @Query(QUERY_CHANNEL_ID) String userId, @Query(QUERY_KEY) String keyGoogle);
 
-    @GET(PLAYLIST_ITEM)
-    PlaylistListResponse playListItem(@Query(QUERY_PART) String part, @Query(QUERY_PLAYLIST_ID) String playListId, @Query(QUERY_KEY) String keyGoogle);
-
-    @GET(VIDEOS)
-    VideoListResponse videoDescribe(@Query(QUERY_PART) String part, @Query(QUERY_ID) String videoId, @Query(QUERY_KEY) String keyGoogle);
+//    @GET(PLAYLIST_ITEM)
+//    PlaylistListResponse playListItem(@Query(QUERY_PART) String part, @Query(QUERY_PLAYLIST_ID) String playListId, @Query(QUERY_KEY) String keyGoogle);
+//
+//    @GET(VIDEOS)
+//    VideoListResponse videoDescribe(@Query(QUERY_PART) String part, @Query(QUERY_ID) String videoId, @Query(QUERY_KEY) String keyGoogle);
 
 }
 

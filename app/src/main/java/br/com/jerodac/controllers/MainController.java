@@ -5,7 +5,7 @@ import br.com.jerodac.business.RestClient;
 import br.com.jerodac.business.RestError;
 import br.com.jerodac.model.ModelPresenter;
 import br.com.jerodac.utils.AppLog;
-import br.com.jerodac.vo.PlaylistListResponse;
+import br.com.jerodac.vo.ChannelListResponse;
 
 /**
  * @author Jean Rodrigo Dalbon Cunha on 02/03/17.
@@ -32,21 +32,22 @@ public class MainController {
     }
 
     public void getChannelList() {
-        new FactoryAsyncTask<PlaylistListResponse>() {
+        new FactoryAsyncTask<ChannelListResponse>() {
             @Override
-            protected PlaylistListResponse doIt() {
+            protected ChannelListResponse doIt() {
                 return RestClient.getAllPlayList();
             }
 
             @Override
-            protected void onSuccess(PlaylistListResponse response) {
-                response.getItems();
-                AppLog.v(AppLog.TAG, "success! " + response.toString());
+            protected void onSuccess(ChannelListResponse response) {
+                AppLog.v(AppLog.TAG, "getChannelList() - success");
+                modelPresenter.setChannelList(response.getItems());
                 notifyListener(true);
             }
 
             @Override
             protected void onError(RestError restError) {
+                AppLog.e(AppLog.TAG, "getChannelList() - error", restError.getException());
                 notifyListener(false);
             }
         }.execute();
