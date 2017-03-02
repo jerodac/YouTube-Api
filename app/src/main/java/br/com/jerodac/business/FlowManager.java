@@ -28,4 +28,14 @@ public class FlowManager {
         }
         ft.commit();
     }
+
+    public void replace(BaseFragment newFragment, boolean backStack) {
+        FragmentTransaction ft = mFragmentManager.beginTransaction();
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.replace(mContainer, newFragment, newFragment.getTagName());
+        if (backStack) {
+            ft.addToBackStack(null);
+        }
+        ft.commit();
+    }
 }

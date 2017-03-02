@@ -25,9 +25,9 @@ public interface API {
     @GET(PLAYLIST)
     ChannelListResponse playList(@Query(QUERY_PART) String part, @Query(QUERY_CHANNEL_ID) String userId, @Query(QUERY_KEY) String keyGoogle);
 
-//    @GET(PLAYLIST_ITEM)
-//    PlaylistListResponse playListItem(@Query(QUERY_PART) String part, @Query(QUERY_PLAYLIST_ID) String playListId, @Query(QUERY_KEY) String keyGoogle);
-//
+    @GET(PLAYLIST_ITEM)
+    ChannelListResponse playListItem(@Query(QUERY_PART) String part, @Query(QUERY_PLAYLIST_ID) String playListId, @Query(QUERY_KEY) String keyGoogle);
+
 //    @GET(VIDEOS)
 //    VideoListResponse videoDescribe(@Query(QUERY_PART) String part, @Query(QUERY_ID) String videoId, @Query(QUERY_KEY) String keyGoogle);
 

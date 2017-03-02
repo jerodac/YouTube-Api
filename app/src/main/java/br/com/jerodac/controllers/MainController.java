@@ -6,6 +6,7 @@ import br.com.jerodac.business.RestError;
 import br.com.jerodac.model.ModelPresenter;
 import br.com.jerodac.utils.AppLog;
 import br.com.jerodac.vo.ChannelListResponse;
+import br.com.jerodac.vo.PlayListItem;
 
 /**
  * @author Jean Rodrigo Dalbon Cunha on 02/03/17.
@@ -27,8 +28,16 @@ public class MainController {
         modelPresenter = new ModelPresenter();
     }
 
+    public ModelPresenter getModel() {
+        return modelPresenter;
+    }
+
     public void attatchListener(OnRefreshListener onRefreshListener) {
         mListener = onRefreshListener;
+    }
+
+    public void setCurrentChannel(PlayListItem currentChannel) {
+        modelPresenter.setCurrentPlaylist(currentChannel);
     }
 
     public void getChannelList() {

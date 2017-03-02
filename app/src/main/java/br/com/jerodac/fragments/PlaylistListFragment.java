@@ -2,11 +2,13 @@ package br.com.jerodac.fragments;
 
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -20,7 +22,7 @@ import butterknife.BindView;
 /**
  * @author Jean Rodrigo Dalbon Cunha on 02/03/17.
  */
-public class ChannelListFragment extends BaseFragment {
+public class PlaylistListFragment extends BaseFragment {
 
     @BindView(R.id.recyclerview)
     protected RecyclerView recyclerView;
@@ -31,7 +33,7 @@ public class ChannelListFragment extends BaseFragment {
     @BindView(R.id.container_loader)
     protected ViewGroup mContainerLoader;
 
-    //RecyclerView Adapter
+    //Adapter
     private ChannelListAdapter mAdapter;
 
     @Override
@@ -68,8 +70,7 @@ public class ChannelListFragment extends BaseFragment {
     ChannelListAdapter.OnItemClickListener onItemClickListener = new ChannelListAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(int position, PlayListItem playlist, View v) {
-            getController().setCurrentChannel(playlist);
-            getFlowManager().replace(new PlaylistListFragment(), true);
+
         }
     };
 
@@ -97,12 +98,16 @@ public class ChannelListFragment extends BaseFragment {
 
     @Override
     protected void settings(View rootView) {
-        getBaseActivity().findViewById(R.id.collapsing_background).setBackgroundResource(android.R.color.transparent);
-        ((TextView) getBaseActivity().findViewById(R.id.describe_collapsing)).setText(getString(R.string.describe_playlist));
-        ((AppCompatImageView) getBaseActivity().findViewById(R.id.backdrop)).setImageResource(R.drawable.ic_paralax_youtube);
+        getBaseActivity().findViewById(R.id.collapsing_background).setBackgroundResource(android.R.color.white);
+        ((TextView) getBaseActivity().findViewById(R.id.describe_collapsing)).setText(getModel().getCurrentPlaylist().getSnippet().getTitle());
+        Picasso.with(getContext())
+                .load(getModel().getCurrentPlaylist().getSnippet().getThumbnails().getMedium().getUrl())
+                .placeholder(R.drawable.ic_paralax_youtube)
+                .error(R.drawable.ic_paralax_youtube)
+                .into((ImageView) getActivity().findViewById(R.id.backdrop));
 
         ((AppBarLayout) getActivity().findViewById(R.id.app_bar)).setExpanded(true);
-        getBaseActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        getBaseActivity().getSupportActionBar().setDisplayShowHomeEnabled(false);
+        getBaseActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getBaseActivity().getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 }

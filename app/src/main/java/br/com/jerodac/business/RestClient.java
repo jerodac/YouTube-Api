@@ -19,10 +19,10 @@ public class RestClient {
         return Configuration.getApi().playList(PART, CHANNEL_ID, KEY_GOOGLE);
     }
 
-//    //Returns videos from a specific playlist
-//    public static PlaylistListResponse getVideosByPLayList(String playListId) {
-//        return Configuration.getApi().playListItem(PART, playListId, KEY_GOOGLE);
-//    }
+    //Returns videos from a specific playlist
+    public static ChannelListResponse getVideosByPLayList(String playListId) {
+        return Configuration.getApi().playListItem(PART, playListId, KEY_GOOGLE);
+    }
 //
 //    //Returns information about a video
 //    public static VideoListResponse getInfoByVideo(String videoId) {

@@ -27,6 +27,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <RelativeLayout
+                android:id="@+id/collapsing_background"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true">
@@ -35,7 +36,7 @@
                     android:id="@+id/backdrop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:alpha="0.4"
+                    android:alpha="0.5"
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_paralax_youtube"
@@ -45,15 +46,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
                     android:alpha="0.7"
                     android:background="@android:color/black"
-                    android:orientation="vertical"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true">
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/describe_playlist"
+                        android:id="@+id/describe_collapsing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
