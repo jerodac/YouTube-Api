@@ -1,6 +1,7 @@
 package br.com.jerodac.utils;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.FrameLayout;
@@ -9,6 +10,17 @@ import android.widget.FrameLayout;
  * @author Jean Rodrigo Dalbon Cunha on 03/03/17.
  */
 public class AnimationSuite {
+
+    /**
+     * Toogle expandable
+     */
+    public static void toggleExpandable(ViewGroup viewGroup) {
+        if (viewGroup.getVisibility() == View.VISIBLE) {
+            AnimationSuite.collapse(viewGroup, null);
+        } else {
+            AnimationSuite.expand(viewGroup, null);
+        }
+    }
 
     /**
      * Expandable view

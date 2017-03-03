@@ -39,6 +39,13 @@ public class FlowManager {
         ft.commit();
     }
 
+    public void replaceChildFragment(FragmentManager childFragmentManager, int container, BaseFragment newFragment) {
+        childFragmentManager.beginTransaction()
+                .add(container, newFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
     public void popBack() {
         mFragmentManager.popBackStack();
     }

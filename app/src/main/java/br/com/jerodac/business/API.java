@@ -30,7 +30,7 @@ public interface API {
     PLaylistListResponse playListItem(@Query(QUERY_PART) String part, @Query(QUERY_PLAYLIST_ID) String playListId, @Query(QUERY_KEY) String keyGoogle);
 
     @GET(VIDEOS)
-    VideoInfoResponse videoDescribe(@Query(QUERY_PART) String part, @Query(QUERY_ID) String videoId, @Query(QUERY_KEY) String keyGoogle);
+    VideoInfoResponse videoInfo(@Query(QUERY_PART) String part, @Query(QUERY_ID) String videoId, @Query(QUERY_KEY) String keyGoogle);
 
 }
 

@@ -27,6 +27,6 @@ public class RestClient {
 
     //Returns information about a video
     public static VideoInfoResponse getInfoByVideo(String videoId) {
-        return Configuration.getApi().videoDescribe(PART, videoId, KEY_GOOGLE);
+        return Configuration.getApi().videoInfo(PART, videoId, KEY_GOOGLE);
     }
 }

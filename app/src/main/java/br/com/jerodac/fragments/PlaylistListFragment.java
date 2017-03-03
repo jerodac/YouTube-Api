@@ -72,19 +72,13 @@ public class PlaylistListFragment extends BaseFragment {
 
             ViewGroup videoInfo = (ViewGroup) v.findViewById(R.id.video_info_container);
 
+            //check container is empty
             if (videoInfo.getChildCount() == 0) {
-                getChildFragmentManager().beginTransaction()
-                        .add(R.id.video_info_container, new VideoInfoFragment())
-                        .addToBackStack(null)
-                        .commit();
+                getFlowManager().replaceChildFragment(getChildFragmentManager(),
+                        R.id.video_info_container, new VideoInfoFragment());
             }
 
-            if (videoInfo.getVisibility() == View.VISIBLE) {
-                AnimationSuite.collapse(videoInfo, null);
-            } else {
-                AnimationSuite.expand(videoInfo, null);
-            }
-
+            AnimationSuite.toggleExpandable(videoInfo);
         }
     };
 
