@@ -66,6 +66,7 @@ public class VideoInfoFragment extends BaseFragment {
                     tvLanguage.setText(modelPresenter.getCurrentInfoVideo().getSnippet().getDefaultLanguage());
                     tvTag.setText(AppUtil.formatTags(modelPresenter.getCurrentInfoVideo().getSnippet().getTags()));
                     tvLiveStream.setText(modelPresenter.getCurrentInfoVideo().getSnippet().getLiveBroadcastContent());
+                    getView().findViewById(R.id.btn_play).requestFocus();
                 }
             }, 200);//handler time transition loading to content
         }

@@ -20,10 +20,8 @@ public class AnimationSuite {
     public static void toggleExpandable(ViewGroup viewGroup) {
         if (viewGroup.getVisibility() == View.VISIBLE) {
             AnimationSuite.collapse(viewGroup, null);
-            //viewGroup.setVisibility(View.GONE);
         } else {
             AnimationSuite.expand(viewGroup, null);
-            //viewGroup.setVisibility(View.VISIBLE);
         }
     }
 

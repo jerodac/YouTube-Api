@@ -54,6 +54,7 @@ public class PlaylistListFragment extends BaseFragment {
     private SwipeRefreshLayout.OnRefreshListener onSwipeRefresh = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
+            getController().attatchListener(onResult);
             getController().getChannelList();
         }
     };
@@ -68,11 +69,11 @@ public class PlaylistListFragment extends BaseFragment {
     PLaylistListAdapter.OnItemClickListener onItemClickListener = new PLaylistListAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(int position, PlayListItem playlist, View v) {
+            swipeRefreshLayout.setRefreshing(false);
+
             getModel().setCurrentPLaylist(playlist);
 
             ViewGroup videoInfo = (ViewGroup) v.findViewById(R.id.video_info_container);
-
-            //check container is empty
             if (videoInfo.getChildCount() == 0) {
                 getFlowManager().replaceChildFragment(getChildFragmentManager(),
                         R.id.video_info_container, new VideoInfoFragment());
