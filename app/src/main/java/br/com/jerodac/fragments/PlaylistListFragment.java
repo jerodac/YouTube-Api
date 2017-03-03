@@ -11,6 +11,7 @@ import br.com.jerodac.R;
 import br.com.jerodac.adapters.PLaylistListAdapter;
 import br.com.jerodac.controllers.MainController;
 import br.com.jerodac.model.ModelPresenter;
+import br.com.jerodac.utils.AnimationSuite;
 import br.com.jerodac.utils.AppUtil;
 import br.com.jerodac.utils.SnackBarUtil;
 import br.com.jerodac.vo.PlayListItem;
@@ -67,6 +68,22 @@ public class PlaylistListFragment extends BaseFragment {
     PLaylistListAdapter.OnItemClickListener onItemClickListener = new PLaylistListAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(int position, PlayListItem playlist, View v) {
+            getModel().setCurrentPLaylist(playlist);
+
+            ViewGroup videoInfo = (ViewGroup) v.findViewById(R.id.video_info_container);
+
+            if (videoInfo.getChildCount() == 0) {
+                getChildFragmentManager().beginTransaction()
+                        .add(R.id.video_info_container, new VideoInfoFragment())
+                        .addToBackStack(null)
+                        .commit();
+            }
+
+            if (videoInfo.getVisibility() == View.VISIBLE) {
+                AnimationSuite.collapse(videoInfo, null);
+            } else {
+                AnimationSuite.expand(videoInfo, null);
+            }
 
         }
     };
@@ -102,8 +119,8 @@ public class PlaylistListFragment extends BaseFragment {
 
     @Override
     protected void settings(View rootView) {
-        AppUtil.setTextBackdrop(getBaseActivity(), getModel().getCurrentPlaylist().getSnippet().getTitle());
-        AppUtil.swapBackdrop(getBaseActivity(), getModel().getCurrentPlaylist().getSnippet().getThumbnails().getMedium().getUrl());
+        AppUtil.setTextBackdrop(getBaseActivity(), getModel().getCurrentChannel().getSnippet().getTitle());
+        AppUtil.swapBackdrop(getBaseActivity(), getModel().getCurrentChannel().getSnippet().getThumbnails().getMedium().getUrl());
         AppUtil.enableBackToolbar(getBaseActivity());
     }
 }

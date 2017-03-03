@@ -1,17 +1,19 @@
 package br.com.jerodac.vo;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * @author Jean Rodrigo Dalbon Cunha on 02/03/17.
  */
 public class Snippet {
+
     private String channelId;
     private String title;
     private String description;
-
-    @SerializedName("thumbnails")
+    private String defaultLanguage;
+    private String categoryId;
+    private String liveBroadcastContent;
     private Thumbnails thumbnails;
+    private ResourceId resourceId;
+    private String[] tags;
 
     public String getChannelId() {
         return channelId;
@@ -43,5 +45,45 @@ public class Snippet {
 
     public void setThumbnails(Thumbnails thumbnails) {
         this.thumbnails = thumbnails;
+    }
+
+    public ResourceId getResourceId() {
+        return resourceId;
+    }
+
+    public void setResourceId(ResourceId resourceId) {
+        this.resourceId = resourceId;
+    }
+
+    public String getDefaultLanguage() {
+        return defaultLanguage;
+    }
+
+    public void setDefaultLanguage(String defaultLanguage) {
+        this.defaultLanguage = defaultLanguage;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getLiveBroadcastContent() {
+        return liveBroadcastContent;
+    }
+
+    public void setLiveBroadcastContent(String liveBroadcastContent) {
+        this.liveBroadcastContent = liveBroadcastContent;
+    }
+
+    public String[] getTags() {
+        return tags;
+    }
+
+    public void setTags(String[] tags) {
+        this.tags = tags;
     }
 }

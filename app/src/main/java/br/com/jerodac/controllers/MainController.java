@@ -7,6 +7,7 @@ import br.com.jerodac.model.ModelPresenter;
 import br.com.jerodac.utils.AppLog;
 import br.com.jerodac.vo.PLaylistListResponse;
 import br.com.jerodac.vo.PlayListItem;
+import br.com.jerodac.vo.VideoInfoResponse;
 
 /**
  * @author Jean Rodrigo Dalbon Cunha on 02/03/17.
@@ -37,7 +38,7 @@ public class MainController {
     }
 
     public void setCurrentChannel(PlayListItem currentChannel) {
-        modelPresenter.setCurrentPlaylist(currentChannel);
+        modelPresenter.setCurrentChannel(currentChannel);
     }
 
     public void getChannelList() {
@@ -66,13 +67,35 @@ public class MainController {
         new FactoryAsyncTask<PLaylistListResponse>() {
             @Override
             protected PLaylistListResponse doIt() {
-                return RestClient.getVideosByPLayList(modelPresenter.getCurrentPlaylist().getId());
+                return RestClient.getVideosByPLayList(modelPresenter.getCurrentChannel().getId());
             }
 
             @Override
             protected void onSuccess(PLaylistListResponse response) {
                 AppLog.v(AppLog.TAG, "getPlaylistList() - success");
                 modelPresenter.setPlaylistList(response.getItems());
+                notifyListener(true);
+            }
+
+            @Override
+            protected void onError(RestError restError) {
+                AppLog.e(AppLog.TAG, "getPlaylistList - error", restError.getException());
+                notifyListener(false);
+            }
+        }.execute();
+    }
+
+    public void getVideoInfo() {
+        new FactoryAsyncTask<VideoInfoResponse>() {
+            @Override
+            protected VideoInfoResponse doIt() {
+                return RestClient.getInfoByVideo(modelPresenter.getCurrentPLaylist().getSnippet().getResourceId().getVideoId());
+            }
+
+            @Override
+            protected void onSuccess(VideoInfoResponse response) {
+                AppLog.v(AppLog.TAG, "getPlaylistList() - success");
+                modelPresenter.setCurrentInfoVideo(response.getItems().get(0));
                 notifyListener(true);
             }
 

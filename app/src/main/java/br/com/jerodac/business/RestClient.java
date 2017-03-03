@@ -2,6 +2,7 @@ package br.com.jerodac.business;
 
 
 import br.com.jerodac.vo.PLaylistListResponse;
+import br.com.jerodac.vo.VideoInfoResponse;
 
 
 /**
@@ -23,9 +24,9 @@ public class RestClient {
     public static PLaylistListResponse getVideosByPLayList(String playListId) {
         return Configuration.getApi().playListItem(PART, playListId, KEY_GOOGLE);
     }
-//
-//    //Returns information about a video
-//    public static VideoListResponse getInfoByVideo(String videoId) {
-//        return Configuration.getApi().videoDescribe(PART, videoId, KEY_GOOGLE);
-//    }
+
+    //Returns information about a video
+    public static VideoInfoResponse getInfoByVideo(String videoId) {
+        return Configuration.getApi().videoDescribe(PART, videoId, KEY_GOOGLE);
+    }
 }

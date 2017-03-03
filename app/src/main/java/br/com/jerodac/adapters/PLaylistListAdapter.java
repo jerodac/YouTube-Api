@@ -84,6 +84,8 @@ public class PLaylistListAdapter extends RecyclerView
                 .placeholder(R.mipmap.ic_launcher)
                 .error(R.mipmap.ic_launcher)
                 .into(holder.imgChannel);
+
+        holder.setIsRecyclable(false);
     }
 
     public void addItem(PlayListItem playlist, int index) {

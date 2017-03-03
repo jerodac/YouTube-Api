@@ -11,7 +11,9 @@ public class ModelPresenter {
 
     private List<PlayListItem> channelList;
     private List<PlayListItem> playlistList;
-    private PlayListItem currentPlaylist;
+    private PlayListItem currentChannel;
+    private PlayListItem currentPLaylist;
+    private PlayListItem currentInfoVideo;
 
     public List<PlayListItem> getChannelList() {
         return channelList;
@@ -29,11 +31,27 @@ public class ModelPresenter {
         this.playlistList = playlistList;
     }
 
-    public PlayListItem getCurrentPlaylist() {
-        return currentPlaylist;
+    public PlayListItem getCurrentChannel() {
+        return currentChannel;
     }
 
-    public void setCurrentPlaylist(PlayListItem currentPlaylist) {
-        this.currentPlaylist = currentPlaylist;
+    public void setCurrentChannel(PlayListItem currentChannel) {
+        this.currentChannel = currentChannel;
+    }
+
+    public PlayListItem getCurrentPLaylist() {
+        return currentPLaylist;
+    }
+
+    public void setCurrentPLaylist(PlayListItem currentPLaylist) {
+        this.currentPLaylist = currentPLaylist;
+    }
+
+    public PlayListItem getCurrentInfoVideo() {
+        return currentInfoVideo;
+    }
+
+    public void setCurrentInfoVideo(PlayListItem currentInfoVideo) {
+        this.currentInfoVideo = currentInfoVideo;
     }
 }

@@ -33,7 +33,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * Deve retornar o resource referente ao layout do fragment
      *
-     * @return
+     * @return|
      */
     protected int getLayoutResource() {
         return 0;
