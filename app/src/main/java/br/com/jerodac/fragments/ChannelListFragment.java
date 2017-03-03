@@ -1,12 +1,9 @@
 package br.com.jerodac.fragments;
 
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -14,6 +11,8 @@ import br.com.jerodac.R;
 import br.com.jerodac.adapters.ChannelListAdapter;
 import br.com.jerodac.controllers.MainController;
 import br.com.jerodac.model.ModelPresenter;
+import br.com.jerodac.utils.AppUtil;
+import br.com.jerodac.utils.SnackBarUtil;
 import br.com.jerodac.vo.PlayListItem;
 import butterknife.BindView;
 
@@ -85,7 +84,14 @@ public class ChannelListFragment extends BaseFragment {
 
         @Override
         public void onError() {
-
+            snackBarUtil.showError(new SnackBarUtil.OnClickListener() {
+                @Override
+                public void onClick() {
+                    swipeRefreshLayout.setRefreshing(true);
+                    getController().getChannelList();
+                }
+            });
+            swipeRefreshLayout.setRefreshing(false);
         }
     };
 
@@ -97,12 +103,8 @@ public class ChannelListFragment extends BaseFragment {
 
     @Override
     protected void settings(View rootView) {
-        getBaseActivity().findViewById(R.id.collapsing_background).setBackgroundResource(android.R.color.transparent);
-        ((TextView) getBaseActivity().findViewById(R.id.describe_collapsing)).setText(getString(R.string.describe_playlist));
-        ((AppCompatImageView) getBaseActivity().findViewById(R.id.backdrop)).setImageResource(R.drawable.ic_paralax_youtube);
-
-        ((AppBarLayout) getActivity().findViewById(R.id.app_bar)).setExpanded(true);
-        getBaseActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        getBaseActivity().getSupportActionBar().setDisplayShowHomeEnabled(false);
+        AppUtil.setTextBackdrop(getBaseActivity(), getString(R.string.describe_playlist));
+        AppUtil.setDeafultBackdrop(getBaseActivity());
+        AppUtil.disableBackToolbar(getBaseActivity());
     }
 }

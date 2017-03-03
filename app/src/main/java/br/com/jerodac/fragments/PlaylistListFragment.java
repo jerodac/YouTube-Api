@@ -1,14 +1,9 @@
 package br.com.jerodac.fragments;
 
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -16,6 +11,8 @@ import br.com.jerodac.R;
 import br.com.jerodac.adapters.PLaylistListAdapter;
 import br.com.jerodac.controllers.MainController;
 import br.com.jerodac.model.ModelPresenter;
+import br.com.jerodac.utils.AppUtil;
+import br.com.jerodac.utils.SnackBarUtil;
 import br.com.jerodac.vo.PlayListItem;
 import butterknife.BindView;
 
@@ -49,7 +46,6 @@ public class PlaylistListFragment extends BaseFragment {
     @Override
     protected void initComponents(View rootView) {
         getController().attatchListener(onResult);
-        //getController().getChannelList();
         getController().getPlaylistList();
         swipeRefreshLayout.setOnRefreshListener(onSwipeRefresh);
     }
@@ -87,7 +83,14 @@ public class PlaylistListFragment extends BaseFragment {
 
         @Override
         public void onError() {
-
+            snackBarUtil.showError(new SnackBarUtil.OnClickListener() {
+                @Override
+                public void onClick() {
+                    swipeRefreshLayout.setRefreshing(true);
+                    getController().getChannelList();
+                }
+            });
+            swipeRefreshLayout.setRefreshing(false);
         }
     };
 
@@ -99,16 +102,8 @@ public class PlaylistListFragment extends BaseFragment {
 
     @Override
     protected void settings(View rootView) {
-        getBaseActivity().findViewById(R.id.collapsing_background).setBackgroundResource(android.R.color.white);
-        ((TextView) getBaseActivity().findViewById(R.id.describe_collapsing)).setText(getModel().getCurrentPlaylist().getSnippet().getTitle());
-        Picasso.with(getContext())
-                .load(getModel().getCurrentPlaylist().getSnippet().getThumbnails().getMedium().getUrl())
-                .placeholder(R.drawable.ic_paralax_youtube)
-                .error(R.drawable.ic_paralax_youtube)
-                .into((ImageView) getActivity().findViewById(R.id.backdrop));
-
-        ((AppBarLayout) getActivity().findViewById(R.id.app_bar)).setExpanded(true);
-        getBaseActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getBaseActivity().getSupportActionBar().setDisplayShowHomeEnabled(true);
+        AppUtil.setTextBackdrop(getBaseActivity(), getModel().getCurrentPlaylist().getSnippet().getTitle());
+        AppUtil.swapBackdrop(getBaseActivity(), getModel().getCurrentPlaylist().getSnippet().getThumbnails().getMedium().getUrl());
+        AppUtil.enableBackToolbar(getBaseActivity());
     }
 }

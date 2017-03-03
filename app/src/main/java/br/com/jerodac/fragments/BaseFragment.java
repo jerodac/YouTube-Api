@@ -11,6 +11,7 @@ import br.com.jerodac.MainActivity;
 import br.com.jerodac.business.FlowManager;
 import br.com.jerodac.controllers.MainController;
 import br.com.jerodac.model.ModelPresenter;
+import br.com.jerodac.utils.SnackBarUtil;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -19,8 +20,15 @@ import butterknife.Unbinder;
  * @author Jean Rodrigo Dalbon Cunha on 13/01/17.
  */
 public abstract class BaseFragment extends Fragment {
+
+    //Controller
     private MainController controller;
+
+    //Butterknife binder
     private Unbinder unbinder;
+
+    //Snackbar utilies
+    protected SnackBarUtil snackBarUtil;
 
     /**
      * Deve retornar o resource referente ao layout do fragment
@@ -55,6 +63,7 @@ public abstract class BaseFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         controller = MainController.getInstance();
         settings(view);
+        snackBarUtil = new SnackBarUtil(getView());
         initComponents(view);
         super.onViewCreated(view, savedInstanceState);
     }
@@ -95,5 +104,6 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        snackBarUtil.onDestroy();
     }
 }

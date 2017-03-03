@@ -38,4 +38,8 @@ public class FlowManager {
         }
         ft.commit();
     }
+
+    public void popBack() {
+        mFragmentManager.popBackStack();
+    }
 }

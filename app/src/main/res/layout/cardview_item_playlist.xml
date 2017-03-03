@@ -57,6 +57,7 @@
                     android:paddingLeft="@dimen/album_title_padding"
                     android:paddingRight="@dimen/album_title_padding"
                     android:paddingTop="4dp"
+                    android:layout_marginBottom="10dp"
                     android:textColor="@color/primary_text_color"
                     android:textSize="@dimen/album_title"
                     app:text="Describe"/>
