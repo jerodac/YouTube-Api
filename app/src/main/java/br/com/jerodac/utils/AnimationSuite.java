@@ -3,8 +3,11 @@ package br.com.jerodac.utils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.Transformation;
 import android.widget.FrameLayout;
+
+import br.com.jerodac.R;
 
 /**
  * @author Jean Rodrigo Dalbon Cunha on 03/03/17.
@@ -17,8 +20,10 @@ public class AnimationSuite {
     public static void toggleExpandable(ViewGroup viewGroup) {
         if (viewGroup.getVisibility() == View.VISIBLE) {
             AnimationSuite.collapse(viewGroup, null);
+            //viewGroup.setVisibility(View.GONE);
         } else {
             AnimationSuite.expand(viewGroup, null);
+            //viewGroup.setVisibility(View.VISIBLE);
         }
     }
 
@@ -87,5 +92,36 @@ public class AnimationSuite {
         if (animationListener != null) {
             a.setAnimationListener(animationListener);
         }
+    }
+
+    public static void pulseAnimation(final View view, final AnimationSuiteListener listener) {
+        if (view.isEnabled()) {
+            view.setEnabled(false);
+            Animation pulse = AnimationUtils.loadAnimation(view.getContext(), R.anim.pulse);
+            view.startAnimation(pulse);
+            pulse.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    if (listener != null) {
+                        listener.onAnimationComplete();
+                    }
+                    view.setEnabled(true);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+        }
+    }
+
+    public interface AnimationSuiteListener {
+        public void onAnimationComplete();
     }
 }

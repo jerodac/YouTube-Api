@@ -32,12 +32,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center"
-            android:src="@mipmap/ic_live_stream"/>
-
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,6 +72,13 @@
             android:fontFamily="sans-serif-thin"
             android:gravity="left"
             android:textColor="@color/colorPrimaryDark"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/btn_play"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_live_stream"/>
 
     </LinearLayout>
 

@@ -4,13 +4,13 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:animateLayoutChanges="true"
-             android:minHeight="150dp"
+             android:minHeight="200dp"
              android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/container_loader"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="200dp">
 
         <com.wang.avi.AVLoadingIndicatorView
             android:layout_width="60dp"

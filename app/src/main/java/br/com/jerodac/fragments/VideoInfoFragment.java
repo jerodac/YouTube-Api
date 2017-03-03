@@ -1,5 +1,6 @@
 package br.com.jerodac.fragments;
 
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -7,8 +8,10 @@ import android.widget.TextView;
 import br.com.jerodac.R;
 import br.com.jerodac.controllers.MainController;
 import br.com.jerodac.model.ModelPresenter;
+import br.com.jerodac.utils.AnimationSuite;
 import br.com.jerodac.utils.AppUtil;
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author Jean Rodrigo Dalbon Cunha on 03/03/17.
@@ -41,15 +44,30 @@ public class VideoInfoFragment extends BaseFragment {
         getController().attatchListener(onResult);
     }
 
+    @OnClick(R.id.btn_play)
+    public void play() {
+        AnimationSuite.pulseAnimation(getView().findViewById(R.id.btn_play), new AnimationSuite.AnimationSuiteListener() {
+            @Override
+            public void onAnimationComplete() {
+                AppUtil.playYoutube(getBaseActivity(), getModel().getCurrentInfoVideo().getId());
+            }
+        });
+    }
+
     MainController.OnRefreshListener onResult = new MainController.OnRefreshListener() {
         @Override
-        public void onSucess(ModelPresenter modelPresenter) {
-            mContainerLoader.setVisibility(View.GONE);
-            mContent.setVisibility(View.VISIBLE);
+        public void onSucess(final ModelPresenter modelPresenter) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mContainerLoader.setVisibility(View.GONE);
+                    mContent.setVisibility(View.VISIBLE);
 
-            tvLanguage.setText(modelPresenter.getCurrentInfoVideo().getSnippet().getDefaultLanguage());
-            tvTag.setText(AppUtil.formatTags(modelPresenter.getCurrentInfoVideo().getSnippet().getTags()));
-            tvLiveStream.setText(modelPresenter.getCurrentInfoVideo().getSnippet().getLiveBroadcastContent());
+                    tvLanguage.setText(modelPresenter.getCurrentInfoVideo().getSnippet().getDefaultLanguage());
+                    tvTag.setText(AppUtil.formatTags(modelPresenter.getCurrentInfoVideo().getSnippet().getTags()));
+                    tvLiveStream.setText(modelPresenter.getCurrentInfoVideo().getSnippet().getLiveBroadcastContent());
+                }
+            }, 200);//handler time transition loading to content
         }
 
         @Override

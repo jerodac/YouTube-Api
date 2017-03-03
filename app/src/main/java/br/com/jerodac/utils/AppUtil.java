@@ -1,5 +1,9 @@
 package br.com.jerodac.utils;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
@@ -65,5 +69,17 @@ public class AppUtil {
         }
 
         return sb.toString();
+    }
+
+    /**
+     * Play YouTube Video
+     */
+    public static void playYoutube(Activity act, String videoId) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/embed/" + videoId + "?autoplay=1"));
+        try {
+            act.startActivity(browserIntent);
+        } catch (ActivityNotFoundException ex) {
+            AppLog.e(AppLog.TAG, ex.getMessage());
+        }
     }
 }
